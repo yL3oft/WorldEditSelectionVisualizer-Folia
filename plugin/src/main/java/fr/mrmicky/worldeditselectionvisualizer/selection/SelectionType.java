@@ -1,7 +1,11 @@
 package fr.mrmicky.worldeditselectionvisualizer.selection;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Locale;
 
+@NullMarked
 public enum SelectionType {
 
     SELECTION, CLIPBOARD;
@@ -14,11 +18,7 @@ public enum SelectionType {
         this.name = name().toLowerCase(Locale.ROOT);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public static SelectionType from(String type) {
+    public static @Nullable SelectionType from(String type) {
         try {
             return valueOf(type.toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException e) {
@@ -28,5 +28,9 @@ public enum SelectionType {
 
     static SelectionType[] getValues() {
         return VALUES;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

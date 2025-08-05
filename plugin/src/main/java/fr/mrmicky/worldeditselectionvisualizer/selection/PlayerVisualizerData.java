@@ -2,8 +2,8 @@ package fr.mrmicky.worldeditselectionvisualizer.selection;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.EnumMap;
@@ -14,28 +14,29 @@ import java.util.Optional;
 /**
  * Contains the visualizer data of a connected {@link Player}.
  */
+@NullMarked
 public class PlayerVisualizerData {
 
     private final Map<SelectionType, PlayerSelection> enabledVisualizations = new EnumMap<>(SelectionType.class);
 
-    private final @NotNull Player player;
+    private final Player player;
 
     private @Nullable Location clipboardLockLocation;
     private boolean holdingSelectionItem = true;
 
-    public PlayerVisualizerData(@NotNull Player player) {
+    public PlayerVisualizerData(Player player) {
         this.player = Objects.requireNonNull(player, "player");
     }
 
-    public @NotNull Optional<PlayerSelection> getSelection(SelectionType type) {
+    public Optional<PlayerSelection> getSelection(SelectionType type) {
         return Optional.ofNullable(this.enabledVisualizations.get(type));
     }
 
-    public @NotNull Collection<PlayerSelection> getEnabledVisualizations() {
+    public Collection<PlayerSelection> getEnabledVisualizations() {
         return this.enabledVisualizations.values();
     }
 
-    public @NotNull Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 
@@ -60,7 +61,7 @@ public class PlayerVisualizerData {
         this.enabledVisualizations.computeIfAbsent(type, PlayerSelection::new);
     }
 
-    public @NotNull Location getClipboardLocation() {
+    public Location getClipboardLocation() {
         if (this.clipboardLockLocation == null) {
             return this.player.getLocation();
         }

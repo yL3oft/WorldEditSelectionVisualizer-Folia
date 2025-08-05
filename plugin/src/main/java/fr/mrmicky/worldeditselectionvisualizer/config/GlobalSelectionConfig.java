@@ -1,21 +1,22 @@
 package fr.mrmicky.worldeditselectionvisualizer.config;
 
 import fr.mrmicky.worldeditselectionvisualizer.display.DisplayType;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class GlobalSelectionConfig {
 
     private final int fadeDelay;
     private final int maxSelectionSize;
 
-    private final @NotNull SelectionConfig primary;
-    private final @NotNull SelectionConfig secondary;
-    private final @NotNull SelectionConfig origin;
+    private final SelectionConfig primary;
+    private final SelectionConfig secondary;
+    private final SelectionConfig origin;
 
     public GlobalSelectionConfig(int fadeDelay, int maxSelectionSize,
-                                 @NotNull SelectionConfig primary,
-                                 @NotNull SelectionConfig secondary,
-                                 @NotNull SelectionConfig origin) {
+                                 SelectionConfig primary,
+                                 SelectionConfig secondary,
+                                 SelectionConfig origin) {
         this.fadeDelay = fadeDelay;
         this.maxSelectionSize = maxSelectionSize;
         this.primary = primary;
@@ -31,19 +32,19 @@ public class GlobalSelectionConfig {
         return this.maxSelectionSize;
     }
 
-    public @NotNull SelectionConfig primary() {
+    public SelectionConfig primary() {
         return this.primary;
     }
 
-    public @NotNull SelectionConfig secondary() {
+    public SelectionConfig secondary() {
         return this.secondary;
     }
 
-    public @NotNull SelectionConfig origin() {
+    public SelectionConfig origin() {
         return this.origin;
     }
 
-    public @NotNull SelectionConfig byType(DisplayType type) {
+    public SelectionConfig byType(DisplayType type) {
         switch (type) {
             case PRIMARY:
                 return this.primary;

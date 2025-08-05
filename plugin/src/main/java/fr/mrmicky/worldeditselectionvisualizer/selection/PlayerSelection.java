@@ -1,24 +1,24 @@
 package fr.mrmicky.worldeditselectionvisualizer.selection;
 
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.time.Instant;
 import java.util.Objects;
 
+@NullMarked
 public class PlayerSelection {
 
-    private final @NotNull SelectionType selectionType;
+    private final SelectionType selectionType;
 
+    private Vector3d origin = Vector3d.ZERO;
+    private boolean lastSelectionTooLarge = false;
     private @Nullable SelectionPoints selectionPoints;
-    private @NotNull Vector3d origin = Vector3d.ZERO;
     private @Nullable Instant expireTime;
     private @Nullable RegionInfo lastSelectedRegion;
-    private boolean lastSelectionTooLarge;
 
-    public PlayerSelection(@NotNull SelectionType selectionType) {
+    public PlayerSelection(SelectionType selectionType) {
         this.selectionType = Objects.requireNonNull(selectionType, "selectionType");
     }
 
@@ -26,7 +26,7 @@ public class PlayerSelection {
         return this.selectionPoints;
     }
 
-    public @NotNull Vector3d getOrigin() {
+    public Vector3d getOrigin() {
         return this.origin;
     }
 
@@ -46,7 +46,7 @@ public class PlayerSelection {
         this.lastSelectionTooLarge = lastSelectionTooLarge;
     }
 
-    public @NotNull SelectionType getSelectionType() {
+    public SelectionType getSelectionType() {
         return this.selectionType;
     }
 
@@ -54,7 +54,6 @@ public class PlayerSelection {
         return this.lastSelectedRegion != null ? this.lastSelectedRegion.getVolume() : 0;
     }
 
-    @Contract("-> this")
     public PlayerSelection verifyExpireTime() {
         if (this.expireTime != null && this.expireTime.isBefore(Instant.now())) {
             this.expireTime = null;
@@ -65,7 +64,7 @@ public class PlayerSelection {
 
     public void updateSelection(@Nullable SelectionPoints selectionPoints,
                                 @Nullable RegionInfo lastSelectedRegion,
-                                @NotNull Vector3d origin,
+                                Vector3d origin,
                                 int expireSeconds) {
         this.selectionPoints = selectionPoints;
         this.lastSelectedRegion = lastSelectedRegion;
@@ -78,7 +77,7 @@ public class PlayerSelection {
         resetSelection(null);
     }
 
-    public void resetSelection(RegionInfo lastSelectedRegion) {
+    public void resetSelection(@Nullable RegionInfo lastSelectedRegion) {
         this.lastSelectedRegion = lastSelectedRegion;
         this.selectionPoints = null;
         this.origin = Vector3d.ZERO;

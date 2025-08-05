@@ -5,40 +5,40 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.regions.RegionOperationException;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
 import fr.mrmicky.worldeditselectionvisualizer.selection.RegionInfo;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
+@NullMarked
 public interface RegionAdapter {
 
-    @NotNull Vector3d getMinimumPoint();
+    Vector3d getMinimumPoint();
 
-    @NotNull Vector3d getMaximumPoint();
+    Vector3d getMaximumPoint();
 
-    @NotNull Vector3d getCenter();
+    Vector3d getCenter();
 
     long getVolume();
 
-    @NotNull Vector3d getCuboidPos1();
+    Vector3d getCuboidPos1();
 
-    @NotNull Vector3d getCuboidPos2();
+    Vector3d getCuboidPos2();
 
-    @NotNull List<Vector3d> getPolygonalPoints();
+    List<Vector3d> getPolygonalPoints();
 
-    @NotNull Vector3d getEllipsoidRadius();
+    Vector3d getEllipsoidRadius();
 
-    @NotNull List<Vector3d[]> getConvexTriangles();
+    List<Vector3d[]> getConvexTriangles();
 
-    @NotNull List<Vector3d> getConvexVertices();
+    List<Vector3d> getConvexVertices();
 
-    @NotNull Region transform(@NotNull Transform transform,
-                              @NotNull Vector3d origin);
+    Region transform(Transform transform, Vector3d origin);
 
-    void shift(@NotNull Vector3d vector) throws RegionOperationException;
+    void shift(Vector3d vector) throws RegionOperationException;
 
-    @NotNull Region getRegion();
+    Region getRegion();
 
-    default @NotNull RegionInfo getRegionInfo() {
+    default RegionInfo getRegionInfo() {
         return new RegionInfo(this);
     }
 }

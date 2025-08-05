@@ -7,13 +7,14 @@ import fr.mrmicky.worldeditselectionvisualizer.selection.SelectionType;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@NullMarked
 public class PlaceholderAPIExpansion extends PlaceholderExpansion {
 
     private final WorldEditSelectionVisualizer plugin;
@@ -29,22 +30,22 @@ public class PlaceholderAPIExpansion extends PlaceholderExpansion {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return this.plugin.getName();
     }
 
     @Override
-    public @NotNull String getIdentifier() {
+    public String getIdentifier() {
         return "wesv";
     }
 
     @Override
-    public @NotNull String getAuthor() {
+    public String getAuthor() {
         return String.join(", ", this.plugin.getDescription().getAuthors());
     }
 
     @Override
-    public @NotNull String getVersion() {
+    public String getVersion() {
         return this.plugin.getDescription().getVersion();
     }
 
@@ -54,7 +55,7 @@ public class PlaceholderAPIExpansion extends PlaceholderExpansion {
     }
 
     @Override
-    public @NotNull List<String> getPlaceholders() {
+    public List<String> getPlaceholders() {
         return Arrays.asList(
                 "%wesv_toggled_selection%",
                 "%wesv_toggled_clipboard%",
@@ -64,8 +65,7 @@ public class PlaceholderAPIExpansion extends PlaceholderExpansion {
     }
 
     @Override
-    public @Nullable String onPlaceholderRequest(@Nullable Player player,
-                                                 @NotNull String identifier) {
+    public @Nullable String onPlaceholderRequest(@Nullable Player player, String identifier) {
         if (player == null) {
             return "";
         }
@@ -82,9 +82,9 @@ public class PlaceholderAPIExpansion extends PlaceholderExpansion {
         return type != null ? parsePlaceholder(playerData.get(), args[0], type) : null;
     }
 
-    private @Nullable String parsePlaceholder(@NotNull PlayerVisualizerData player,
-                                              @NotNull String identifier,
-                                              @NotNull SelectionType type) {
+    private @Nullable String parsePlaceholder(PlayerVisualizerData player,
+                                              String identifier,
+                                              SelectionType type) {
         if (identifier.equals("toggled")) {
             return player.isSelectionVisible(type)
                     ? PlaceholderAPIPlugin.booleanTrue()

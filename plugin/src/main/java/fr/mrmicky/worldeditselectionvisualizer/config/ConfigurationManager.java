@@ -9,11 +9,12 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Locale;
 
+@NullMarked
 public class ConfigurationManager {
 
     private final WorldEditSelectionVisualizer plugin;
@@ -22,7 +23,7 @@ public class ConfigurationManager {
         this.plugin = plugin;
     }
 
-    public @NotNull GlobalSelectionConfig loadGlobalSelectionConfig(SelectionType type) {
+    public GlobalSelectionConfig loadGlobalSelectionConfig(SelectionType type) {
         ConfigurationSection section = this.plugin.getConfig()
                 .getConfigurationSection("visualization." + type.getName());
 
@@ -35,11 +36,11 @@ public class ConfigurationManager {
         return new GlobalSelectionConfig(fadeDelay, max, primary, secondary, origin);
     }
 
-    private @NotNull SelectionConfig loadSelectionConfig(ConfigurationSection config) {
+    private SelectionConfig loadSelectionConfig(ConfigurationSection config) {
         return new SelectionConfig(config, this::loadParticle);
     }
 
-    public @NotNull Particle loadParticle(ConfigurationSection config) {
+    public Particle loadParticle(@Nullable ConfigurationSection config) {
         if (config == null) {
             return Particle.FALLBACK;
         }
@@ -61,7 +62,7 @@ public class ConfigurationManager {
         }
     }
 
-    private @Nullable ParticleData loadParticleData(Class<?> dataClass, String name) {
+    private @Nullable ParticleData loadParticleData(Class<?> dataClass, @Nullable String name) {
         if (dataClass == ParticleData.DustOptions.class) {
             if (name == null || name.isEmpty()) {
                 return ParticleData.createDustOptions(Color.RED, 1);
@@ -102,8 +103,8 @@ public class ConfigurationManager {
         throw new IllegalArgumentException("Invalid particle data: " + dataClass.getName());
     }
 
-    private @NotNull Material getMaterial(String type, boolean needBlock) {
-        Material material = Material.matchMaterial(type);
+    private Material getMaterial(@Nullable String type, boolean needBlock) {
+        Material material = Material.matchMaterial(type != null ? type : "");
         if (material == null) {
             this.plugin.getLogger().warning("Invalid material for particle in the config: " + type);
             return Material.STONE;

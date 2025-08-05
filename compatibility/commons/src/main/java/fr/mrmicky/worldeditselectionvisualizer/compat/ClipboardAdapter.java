@@ -4,13 +4,14 @@ import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.regions.RegionOperationException;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public interface ClipboardAdapter {
 
-    @NotNull Vector3d getOrigin();
+    Vector3d getOrigin();
 
-    @NotNull Clipboard getClipboard();
+    Clipboard getClipboard();
 
-    @NotNull Region shiftRegion(@NotNull Vector3d change) throws RegionOperationException;
+    Region shiftRegion(Vector3d change) throws RegionOperationException;
 }

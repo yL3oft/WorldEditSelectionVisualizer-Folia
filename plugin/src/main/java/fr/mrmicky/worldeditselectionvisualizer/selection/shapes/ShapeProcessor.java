@@ -8,10 +8,11 @@ import fr.mrmicky.worldeditselectionvisualizer.geometry.Line;
 import fr.mrmicky.worldeditselectionvisualizer.geometry.Shape;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
 import fr.mrmicky.worldeditselectionvisualizer.selection.SelectionPoints;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
+@NullMarked
 public abstract class ShapeProcessor<R extends Region> {
 
     private final Class<R> regionClass;
@@ -22,8 +23,7 @@ public abstract class ShapeProcessor<R extends Region> {
         this.plugin = plugin;
     }
 
-    public @NotNull SelectionPoints processSelection(RegionAdapter regionAdapter,
-                                                     GlobalSelectionConfig config) {
+    public SelectionPoints processSelection(RegionAdapter regionAdapter, GlobalSelectionConfig config) {
         R region = this.regionClass.cast(regionAdapter.getRegion());
         return processSelection(region, regionAdapter, config);
     }

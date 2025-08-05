@@ -3,57 +3,56 @@ package fr.mrmicky.worldeditselectionvisualizer.event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Objects;
 
 /**
- * Called when a player toggled his selection visualizer
+ * Called when a player toggles their WorldEdit selection visualization.
  */
+@NullMarked
 public class VisualizationToggleEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private final @NotNull Player player;
+    private final Player player;
     private final boolean enabled;
 
     /**
-     * Creates a new custom "VisualizationToggleEvent" event.
+     * Creates a new VisualizationToggleEvent for the given player with the specified enabled state.
      *
-     * @param player  The player who has toggled their WorldEdit selection visualization.
-     * @param enabled The state representing whether the player has enabled
-     *                or disable their WorldEdit selection visualization.
+     * @param player  the player whose visualization was toggled
+     * @param enabled true if the visualization is enabled, false if it is disabled
      */
-    public VisualizationToggleEvent(@NotNull Player player, boolean enabled) {
+    public VisualizationToggleEvent(Player player, boolean enabled) {
         this.player = Objects.requireNonNull(player, "player");
         this.enabled = enabled;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     /**
-     * Gets a player who has toggled their WorldEdit selection visualization.
+     * Returns the player whose visualization was toggled.
      *
-     * @return Returns player who has toggled their WorldEdit selection visualization.
+     * @return the player whose visualization was toggled
      */
-    public @NotNull Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 
     /**
-     * Gets a state representing whether a player has enabled
-     * or disable their WorldEdit selection visualization.
+     * Returns whether the visualization is enabled or disabled.
      *
-     * @return Returns true if a player has enabled visualizations, or false if disabled.
+     * @return true if the visualization is enabled, false if it is disabled
      */
     public boolean isEnabled() {
         return this.enabled;
     }
 
     @Override
-    public @NotNull HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static @NotNull HandlerList getHandlerList() {
+    public HandlerList getHandlers() {
         return handlers;
     }
 }

@@ -2,18 +2,18 @@ package fr.mrmicky.worldeditselectionvisualizer.selection;
 
 import fr.mrmicky.worldeditselectionvisualizer.display.DisplayType;
 import fr.mrmicky.worldeditselectionvisualizer.geometry.Shape;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
 
+@NullMarked
 public class SelectionPoints {
 
-    private final @NotNull Collection<Shape> primary;
-    private final @NotNull Collection<Shape> secondary;
-    private final @NotNull Collection<Shape> origin;
+    private final Collection<Shape> primary;
+    private final Collection<Shape> secondary;
+    private final Collection<Shape> origin;
 
     public SelectionPoints(Collection<Shape> primary, Collection<Shape> secondary) {
         this(primary, secondary, null);
@@ -27,8 +27,7 @@ public class SelectionPoints {
         this.origin = (origin != null) ? Collections.singletonList(origin) : Collections.emptyList();
     }
 
-    @Unmodifiable
-    public @NotNull Collection<Shape> get(DisplayType type) {
+    public Collection<Shape> get(DisplayType type) {
         switch (type) {
             case PRIMARY:
                 return this.primary;

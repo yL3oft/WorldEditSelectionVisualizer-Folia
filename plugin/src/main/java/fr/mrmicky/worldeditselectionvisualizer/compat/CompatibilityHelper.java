@@ -16,8 +16,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.logging.Level;
@@ -25,6 +25,7 @@ import java.util.logging.Level;
 /**
  * Helper class to help support multiples Spigot and WorldEdit versions
  */
+@NullMarked
 public class CompatibilityHelper {
 
     private final WorldEditSelectionVisualizer plugin;
@@ -80,11 +81,11 @@ public class CompatibilityHelper {
         return this.worldEdit7 ? 7 : 6;
     }
 
-    public boolean isHoldingSelectionItem(@NotNull Player player) {
+    public boolean isHoldingSelectionItem(Player player) {
         return isSelectionItem(getItemInMainHand(player)) || isSelectionItem(getItemInOffHand(player));
     }
 
-    public void sendActionBar(@NotNull Player player, @NotNull String message) {
+    public void sendActionBar(Player player, String message) {
         if (!this.supportActionBar) {
             player.sendMessage(message);
             return;
@@ -102,7 +103,7 @@ public class CompatibilityHelper {
     }
 
     @SuppressWarnings("deprecation") // 1.7.10/1.8 servers support
-    private @NotNull ItemStack getItemInMainHand(Player player) {
+    private ItemStack getItemInMainHand(Player player) {
         return player.getItemInHand();
     }
 

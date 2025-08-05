@@ -17,7 +17,7 @@ import fr.mrmicky.worldeditselectionvisualizer.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,14 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public final class WorldEditSelectionVisualizer extends JavaPlugin {
 
@@ -114,11 +107,11 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
         }
     }
 
-    public void updateHoldingSelectionItem(PlayerVisualizerData playerData) {
+    public void updateHoldingSelectionItem(@NonNull PlayerVisualizerData playerData) {
         playerData.setHoldingSelectionItem(this.compatibilityHelper.isHoldingSelectionItem(playerData.getPlayer()));
     }
 
-    public void loadPlayer(Player player) {
+    public void loadPlayer(@NonNull Player player) {
         if (this.players.containsKey(player.getUniqueId())) {
             return;
         }
@@ -135,11 +128,11 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
         this.players.put(player.getUniqueId(), playerData);
     }
 
-    public void unloadPlayer(Player player) {
+    public void unloadPlayer(@NonNull Player player) {
         this.players.remove(player.getUniqueId());
     }
 
-    public @NotNull PlayerVisualizerData getPlayerData(Player player) {
+    public @NonNull PlayerVisualizerData getPlayerData(Player player) {
         PlayerVisualizerData playerData = this.players.get(player.getUniqueId());
 
         if (playerData == null) {
@@ -149,11 +142,11 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
         return playerData;
     }
 
-    public @NotNull Optional<PlayerVisualizerData> getOptionalPlayerData(Player player) {
+    public @NonNull Optional<PlayerVisualizerData> getOptionalPlayerData(Player player) {
         return Optional.ofNullable(this.players.get(player.getUniqueId()));
     }
 
-    public @NotNull Collection<PlayerVisualizerData> getPlayers() {
+    public @NonNull Collection<PlayerVisualizerData> getPlayers() {
         return this.players.values();
     }
 

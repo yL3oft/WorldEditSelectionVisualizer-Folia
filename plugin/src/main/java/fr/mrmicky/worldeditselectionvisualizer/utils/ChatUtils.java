@@ -1,9 +1,9 @@
 package fr.mrmicky.worldeditselectionvisualizer.utils;
 
 import net.md_5.bungee.api.ChatColor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public final class ChatUtils {
 
     private static final boolean HEX_COLORS;
@@ -25,7 +25,7 @@ public final class ChatUtils {
         throw new UnsupportedOperationException();
     }
 
-    public static @NotNull String color(@NotNull String s) {
+    public static String color(String s) {
         return org.bukkit.ChatColor.translateAlternateColorCodes('&', colorHex(s));
     }
 
@@ -35,8 +35,7 @@ public final class ChatUtils {
      * @param s the input string
      * @return string with replaced color codes
      */
-    @VisibleForTesting
-    public static @NotNull String colorHex(@NotNull String s) {
+    public static String colorHex(String s) {
         if (!HEX_COLORS) {
             return s;
         }

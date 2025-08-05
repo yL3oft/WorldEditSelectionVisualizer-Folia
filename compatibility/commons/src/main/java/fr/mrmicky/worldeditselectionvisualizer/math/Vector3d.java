@@ -1,7 +1,9 @@
 package fr.mrmicky.worldeditselectionvisualizer.math;
 
 import org.bukkit.util.Vector;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class Vector3d {
 
     public static final Vector3d ZERO = new Vector3d(0, 0, 0);
@@ -86,6 +88,10 @@ public class Vector3d {
 
     public Vector3d normalize() {
         return divide(length());
+    }
+
+    public double dot(Vector3d vec) {
+        return this.x * vec.x + this.y * vec.y + this.z * vec.z;
     }
 
     public double distance(Vector3d vec) {

@@ -2,13 +2,14 @@ package fr.mrmicky.worldeditselectionvisualizer.geometry;
 
 import fr.mrmicky.worldeditselectionvisualizer.config.SelectionConfig;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Objects;
 
+@NullMarked
 public class Ellipse implements Shape {
 
-    private final @NotNull Vector3d center;
+    private final Vector3d center;
     private final int points;
     private final double[] x;
     private final double[] z;
@@ -31,7 +32,7 @@ public class Ellipse implements Shape {
     }
 
     @Override
-    public void render(@NotNull VectorRenderer renderer) {
+    public void render(VectorRenderer renderer) {
         for (int i = 0; i < this.points; i++) {
             renderer.render(this.x[i], this.center.getY(), this.z[i]);
         }

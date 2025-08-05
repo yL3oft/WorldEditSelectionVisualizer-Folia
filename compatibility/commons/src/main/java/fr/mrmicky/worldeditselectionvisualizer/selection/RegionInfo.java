@@ -4,15 +4,16 @@ import com.sk89q.worldedit.regions.ConvexPolyhedralRegion;
 import com.sk89q.worldedit.regions.Region;
 import fr.mrmicky.worldeditselectionvisualizer.compat.RegionAdapter;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Objects;
 
+@NullMarked
 public class RegionInfo {
 
-    private final @NotNull RegionAdapter regionAdapter;
-    private final @NotNull Vector3d minimum;
-    private final @NotNull Vector3d maximum;
+    private final RegionAdapter regionAdapter;
+    private final Vector3d minimum;
+    private final Vector3d maximum;
 
     private final int width;
     private final int length;
@@ -21,8 +22,8 @@ public class RegionInfo {
     private final long volume;
     private final int points;
 
-    public RegionInfo(@NotNull RegionAdapter regionAdapter) {
-        this.regionAdapter = regionAdapter;
+    public RegionInfo(RegionAdapter regionAdapter) {
+        this.regionAdapter = Objects.requireNonNull(regionAdapter, "regionAdapter");
 
         Region region = regionAdapter.getRegion();
         this.minimum = regionAdapter.getMinimumPoint();
@@ -35,15 +36,15 @@ public class RegionInfo {
                 ? ((ConvexPolyhedralRegion) region).getTriangles().size() : 0;
     }
 
-    public @NotNull RegionAdapter getRegionAdapter() {
+    public RegionAdapter getRegionAdapter() {
         return this.regionAdapter;
     }
 
-    public @NotNull Vector3d getMinimum() {
+    public Vector3d getMinimum() {
         return this.minimum;
     }
 
-    public @NotNull Vector3d getMaximum() {
+    public Vector3d getMaximum() {
         return this.maximum;
     }
 

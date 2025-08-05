@@ -12,22 +12,23 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.NumberConversions;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Collection;
 
+@NullMarked
 public class ParticlesTask implements Runnable {
 
     private final WorldEditSelectionVisualizer plugin;
 
-    private final @NotNull SelectionType type;
-    private final @NotNull DisplayType displayType;
-    private final @NotNull SelectionConfig config;
+    private final SelectionType type;
+    private final DisplayType displayType;
+    private final SelectionConfig config;
 
     public ParticlesTask(WorldEditSelectionVisualizer plugin,
-                         @NotNull SelectionType type,
-                         @NotNull DisplayType displayType,
-                         @NotNull SelectionConfig config) {
+                         SelectionType type,
+                         DisplayType displayType,
+                         SelectionConfig config) {
         this.plugin = plugin;
         this.type = type;
         this.displayType = displayType;

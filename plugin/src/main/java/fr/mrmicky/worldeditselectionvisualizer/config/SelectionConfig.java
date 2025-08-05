@@ -2,17 +2,18 @@ package fr.mrmicky.worldeditselectionvisualizer.config;
 
 import fr.mrmicky.worldeditselectionvisualizer.display.Particle;
 import org.bukkit.configuration.ConfigurationSection;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.function.Function;
 
+@NullMarked
 public class SelectionConfig {
 
     private final double pointsDistance;
     private final double linesGap;
     private final int updateInterval;
     private final int viewDistance;
-    private final @NotNull Particle particle;
+    private final Particle particle;
 
     public SelectionConfig(ConfigurationSection config, Function<ConfigurationSection, Particle> map) {
         this.pointsDistance = config.getDouble("points-distance");
@@ -38,7 +39,7 @@ public class SelectionConfig {
         return this.viewDistance;
     }
 
-    public @NotNull Particle getParticle() {
+    public Particle getParticle() {
         return this.particle;
     }
 }

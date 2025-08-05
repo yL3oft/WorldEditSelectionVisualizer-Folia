@@ -2,12 +2,13 @@ package fr.mrmicky.worldeditselectionvisualizer.geometry;
 
 import fr.mrmicky.worldeditselectionvisualizer.config.SelectionConfig;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class Line implements Shape {
 
-    private final @NotNull Vector3d start;
-    private final @NotNull Vector3d gap;
+    private final Vector3d start;
+    private final Vector3d gap;
     private final int points;
 
     public Line(Vector3d start, Vector3d end, SelectionConfig config) {
@@ -19,7 +20,7 @@ public class Line implements Shape {
     }
 
     @Override
-    public void render(@NotNull VectorRenderer renderer) {
+    public void render(VectorRenderer renderer) {
         for (int i = 0; i < this.points; i++) {
             double x = this.start.getX() + this.gap.getX() * i;
             double y = this.start.getY() + this.gap.getY() * i;

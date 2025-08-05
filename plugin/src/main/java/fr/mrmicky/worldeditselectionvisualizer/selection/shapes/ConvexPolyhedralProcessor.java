@@ -9,11 +9,13 @@ import fr.mrmicky.worldeditselectionvisualizer.geometry.Point;
 import fr.mrmicky.worldeditselectionvisualizer.geometry.Shape;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
 import fr.mrmicky.worldeditselectionvisualizer.selection.SelectionPoints;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@NullMarked
 public class ConvexPolyhedralProcessor extends ShapeProcessor<ConvexPolyhedralRegion> {
 
     public ConvexPolyhedralProcessor(WorldEditSelectionVisualizer plugin) {

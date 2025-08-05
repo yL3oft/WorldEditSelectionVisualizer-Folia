@@ -11,10 +11,12 @@ import com.sk89q.worldedit.regions.CylinderRegion;
 import com.sk89q.worldedit.regions.EllipsoidRegion;
 import com.sk89q.worldedit.regions.Polygonal2DRegion;
 import com.sk89q.worldedit.regions.Region;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NullMarked
 public final class RegionTransforms7 {
 
     private RegionTransforms7() {

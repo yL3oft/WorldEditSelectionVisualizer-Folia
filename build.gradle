@@ -23,7 +23,7 @@ subprojects {
     }
 
     dependencies {
-        compileOnly 'org.jetbrains:annotations:24.0.1'
+        implementation 'org.jspecify:jspecify:1.0.0'
         compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
     }
 }

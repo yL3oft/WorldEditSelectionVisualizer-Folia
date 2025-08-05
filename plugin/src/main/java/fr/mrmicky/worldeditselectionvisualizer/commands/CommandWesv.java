@@ -11,12 +11,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@NullMarked
 public class CommandWesv implements TabExecutor {
 
     private final WorldEditSelectionVisualizer plugin;
@@ -26,10 +27,7 @@ public class CommandWesv implements TabExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender,
-                             @NotNull Command command,
-                             @NotNull String label,
-                             @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("wesv.use")) {
             sender.sendMessage(this.plugin.getMessage("no-permissions"));
             return true;
@@ -75,10 +73,7 @@ public class CommandWesv implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender,
-                                      @NotNull Command command,
-                                      @NotNull String alias,
-                                      @NotNull String[] args) {
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length > 2 || !sender.hasPermission("wesv.use")) {
             return Collections.emptyList();
         }

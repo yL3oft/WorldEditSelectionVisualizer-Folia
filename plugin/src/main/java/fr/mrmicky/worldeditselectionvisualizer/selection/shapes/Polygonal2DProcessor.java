@@ -7,10 +7,12 @@ import fr.mrmicky.worldeditselectionvisualizer.config.GlobalSelectionConfig;
 import fr.mrmicky.worldeditselectionvisualizer.geometry.Shape;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
 import fr.mrmicky.worldeditselectionvisualizer.selection.SelectionPoints;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NullMarked
 public class Polygonal2DProcessor extends ShapeProcessor<Polygonal2DRegion> {
 
     public Polygonal2DProcessor(WorldEditSelectionVisualizer plugin) {

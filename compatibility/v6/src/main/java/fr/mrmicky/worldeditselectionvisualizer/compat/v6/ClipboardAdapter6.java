@@ -6,31 +6,31 @@ import com.sk89q.worldedit.regions.RegionOperationException;
 import fr.mrmicky.worldeditselectionvisualizer.compat.ClipboardAdapter;
 import fr.mrmicky.worldeditselectionvisualizer.compat.v6.utils.Vectors6;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Objects;
 
+@NullMarked
 public class ClipboardAdapter6 implements ClipboardAdapter {
 
-    private final @NotNull Clipboard clipboard;
+    private final Clipboard clipboard;
 
-    public ClipboardAdapter6(@NotNull Clipboard clipboard) {
+    public ClipboardAdapter6(Clipboard clipboard) {
         this.clipboard = Objects.requireNonNull(clipboard, "clipboard");
     }
 
     @Override
-    public @NotNull Vector3d getOrigin() {
+    public Vector3d getOrigin() {
         return Vectors6.toVector3d(this.clipboard.getOrigin());
     }
 
     @Override
-    public @NotNull Clipboard getClipboard() {
+    public Clipboard getClipboard() {
         return this.clipboard;
     }
 
     @Override
-    public @NotNull Region shiftRegion(@NotNull Vector3d change)
-            throws RegionOperationException {
+    public Region shiftRegion(Vector3d change) throws RegionOperationException {
         Region region = this.clipboard.getRegion().clone();
         region.shift(Vectors6.toVector(change));
         return region;

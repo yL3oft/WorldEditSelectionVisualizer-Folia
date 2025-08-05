@@ -13,32 +13,33 @@ import fr.mrmicky.worldeditselectionvisualizer.compat.RegionAdapter;
 import fr.mrmicky.worldeditselectionvisualizer.compat.v7.utils.RegionTransforms7;
 import fr.mrmicky.worldeditselectionvisualizer.compat.v7.utils.Vectors7;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@NullMarked
 public class RegionAdapter7 implements RegionAdapter {
 
-    private final @NotNull Region region;
+    private final Region region;
 
-    public RegionAdapter7(@NotNull Region region) {
+    public RegionAdapter7(Region region) {
         this.region = Objects.requireNonNull(region, "region");
     }
 
     @Override
-    public @NotNull Vector3d getMinimumPoint() {
+    public Vector3d getMinimumPoint() {
         return Vectors7.toVector3d(this.region.getMinimumPoint());
     }
 
     @Override
-    public @NotNull Vector3d getMaximumPoint() {
+    public Vector3d getMaximumPoint() {
         return Vectors7.toVector3d(this.region.getMaximumPoint());
     }
 
     @Override
-    public @NotNull Vector3d getCenter() {
+    public Vector3d getCenter() {
         return Vectors7.toVector3d(this.region.getCenter());
     }
 
@@ -48,7 +49,7 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public @NotNull Vector3d getCuboidPos1() {
+    public Vector3d getCuboidPos1() {
         if (!(this.region instanceof CuboidRegion)) {
             throw new UnsupportedOperationException();
         }
@@ -57,7 +58,7 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public @NotNull Vector3d getCuboidPos2() {
+    public Vector3d getCuboidPos2() {
         if (!(this.region instanceof CuboidRegion)) {
             throw new UnsupportedOperationException();
         }
@@ -66,7 +67,7 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public @NotNull List<Vector3d> getPolygonalPoints() {
+    public List<Vector3d> getPolygonalPoints() {
         if (!(this.region instanceof Polygonal2DRegion)) {
             throw new UnsupportedOperationException();
         }
@@ -78,7 +79,7 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public @NotNull Vector3d getEllipsoidRadius() {
+    public Vector3d getEllipsoidRadius() {
         if (!(this.region instanceof EllipsoidRegion)) {
             throw new UnsupportedOperationException();
         }
@@ -87,7 +88,7 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public @NotNull List<Vector3d[]> getConvexTriangles() {
+    public List<Vector3d[]> getConvexTriangles() {
         if (!(this.region instanceof ConvexPolyhedralRegion)) {
             throw new UnsupportedOperationException();
         }
@@ -99,7 +100,7 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public @NotNull List<Vector3d> getConvexVertices() {
+    public List<Vector3d> getConvexVertices() {
         if (!(this.region instanceof ConvexPolyhedralRegion)) {
             throw new UnsupportedOperationException();
         }
@@ -111,23 +112,23 @@ public class RegionAdapter7 implements RegionAdapter {
     }
 
     @Override
-    public void shift(@NotNull Vector3d vector) throws RegionOperationException {
+    public void shift(Vector3d vector) throws RegionOperationException {
         this.region.shift(Vectors7.toBlockVector3(vector));
     }
 
     @Override
-    public @NotNull Region transform(@NotNull Transform transform, @NotNull Vector3d origin) {
+    public Region transform(Transform transform, Vector3d origin) {
         Vector3 originVec = Vectors7.toVector3(origin);
 
         return RegionTransforms7.originTransform(this.region, transform, originVec);
     }
 
     @Override
-    public @NotNull Region getRegion() {
+    public Region getRegion() {
         return this.region;
     }
 
-    private @NotNull Vector3d[] triangleToVectors(Triangle triangle) {
+    private Vector3d[] triangleToVectors(Triangle triangle) {
         Vector3d[] vectors = new Vector3d[3];
 
         for (int i = 0; i < vectors.length; i++) {
