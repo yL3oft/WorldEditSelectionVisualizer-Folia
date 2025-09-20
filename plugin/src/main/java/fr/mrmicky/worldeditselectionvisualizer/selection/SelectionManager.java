@@ -9,6 +9,7 @@ import com.sk89q.worldedit.math.transform.Transform;
 import com.sk89q.worldedit.regions.*;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import fr.mrmicky.worldeditselectionvisualizer.WorldEditSelectionVisualizer;
+import fr.mrmicky.worldeditselectionvisualizer.compat.FoliaRunnable;
 import fr.mrmicky.worldeditselectionvisualizer.compat.RegionAdapter;
 import fr.mrmicky.worldeditselectionvisualizer.config.GlobalSelectionConfig;
 import fr.mrmicky.worldeditselectionvisualizer.event.ClipboardChangeEvent;
@@ -23,7 +24,6 @@ import fr.mrmicky.worldeditselectionvisualizer.selection.shapes.ShapeProcessor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @NullMarked
-public class SelectionManager extends BukkitRunnable {
+public class SelectionManager extends FoliaRunnable {
 
     private final Map<Class<? extends Region>, ShapeProcessor<?>> shapeProcessors = new HashMap<>(8);
 
@@ -49,7 +49,7 @@ public class SelectionManager extends BukkitRunnable {
             throw new IllegalStateException("WorldEditPlugin not found");
         }
 
-        runTaskTimer(plugin, 20, plugin.getConfig().getInt("selection-update-interval"));
+        plugin.getCompatibilityHelper().getScheduler().runTaskTimer(null, this, 20, plugin.getConfig().getInt("selection-update-interval"));
     }
 
     @Override

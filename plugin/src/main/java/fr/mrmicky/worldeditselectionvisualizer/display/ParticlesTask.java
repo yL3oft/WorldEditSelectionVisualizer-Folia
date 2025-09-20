@@ -1,6 +1,7 @@
 package fr.mrmicky.worldeditselectionvisualizer.display;
 
 import fr.mrmicky.worldeditselectionvisualizer.WorldEditSelectionVisualizer;
+import fr.mrmicky.worldeditselectionvisualizer.compat.FoliaRunnable;
 import fr.mrmicky.worldeditselectionvisualizer.config.SelectionConfig;
 import fr.mrmicky.worldeditselectionvisualizer.geometry.Shape;
 import fr.mrmicky.worldeditselectionvisualizer.math.Vector3d;
@@ -8,16 +9,14 @@ import fr.mrmicky.worldeditselectionvisualizer.selection.PlayerSelection;
 import fr.mrmicky.worldeditselectionvisualizer.selection.PlayerVisualizerData;
 import fr.mrmicky.worldeditselectionvisualizer.selection.SelectionPoints;
 import fr.mrmicky.worldeditselectionvisualizer.selection.SelectionType;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.NumberConversions;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.Collection;
 
 @NullMarked
-public class ParticlesTask implements Runnable {
+public class ParticlesTask extends FoliaRunnable {
 
     private final WorldEditSelectionVisualizer plugin;
 
@@ -35,10 +34,10 @@ public class ParticlesTask implements Runnable {
         this.config = config;
     }
 
-    public BukkitTask start() {
+    public FoliaRunnable start() {
         int interval = this.config.getUpdateInterval();
 
-        return Bukkit.getScheduler().runTaskTimer(this.plugin, this, interval, interval);
+        return plugin.getCompatibilityHelper().getScheduler().runTaskTimer(null, this, interval, interval);
     }
 
     @Override

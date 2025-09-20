@@ -12,6 +12,7 @@ import fr.mrmicky.worldeditselectionvisualizer.compat.v6.ClipboardAdapter6;
 import fr.mrmicky.worldeditselectionvisualizer.compat.v6.RegionAdapter6;
 import fr.mrmicky.worldeditselectionvisualizer.compat.v7.ClipboardAdapter7;
 import fr.mrmicky.worldeditselectionvisualizer.compat.v7.RegionAdapter7;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,6 +21,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 
 /**
@@ -29,15 +32,18 @@ import java.util.logging.Level;
 public class CompatibilityHelper {
 
     private final WorldEditSelectionVisualizer plugin;
+    private final SchedulerUtils scheduler;
 
     private final boolean supportOffHand = isOffhandSupported();
     private final boolean supportActionBar = isActionBarSupported();
     private final boolean worldEdit7 = isWorldEdit7();
+    public final boolean folia = isFolia();
 
     private @Nullable Material selectionItem;
 
     public CompatibilityHelper(WorldEditSelectionVisualizer plugin) {
         this.plugin = plugin;
+        this.scheduler = new SchedulerUtils(plugin);
 
         plugin.getLogger().info("Using WorldEdit " + getWorldEditVersion() + " api");
 
@@ -79,6 +85,10 @@ public class CompatibilityHelper {
 
     public int getWorldEditVersion() {
         return this.worldEdit7 ? 7 : 6;
+    }
+
+    public SchedulerUtils getScheduler() {
+        return this.scheduler;
     }
 
     public boolean isHoldingSelectionItem(Player player) {
@@ -141,6 +151,15 @@ public class CompatibilityHelper {
         try {
             Class.forName("com.sk89q.worldedit.math.Vector3");
 
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    private boolean isFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
             return true;
         } catch (ClassNotFoundException e) {
             return false;

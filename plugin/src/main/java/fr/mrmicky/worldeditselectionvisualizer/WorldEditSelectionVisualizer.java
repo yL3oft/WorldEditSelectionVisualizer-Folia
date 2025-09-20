@@ -3,6 +3,7 @@ package fr.mrmicky.worldeditselectionvisualizer;
 import com.sk89q.worldedit.regions.Region;
 import fr.mrmicky.worldeditselectionvisualizer.commands.CommandWesv;
 import fr.mrmicky.worldeditselectionvisualizer.compat.CompatibilityHelper;
+import fr.mrmicky.worldeditselectionvisualizer.compat.FoliaRunnable;
 import fr.mrmicky.worldeditselectionvisualizer.config.ConfigurationManager;
 import fr.mrmicky.worldeditselectionvisualizer.config.GlobalSelectionConfig;
 import fr.mrmicky.worldeditselectionvisualizer.display.DisplayType;
@@ -16,7 +17,6 @@ import fr.mrmicky.worldeditselectionvisualizer.selection.StorageManager;
 import fr.mrmicky.worldeditselectionvisualizer.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 import org.jspecify.annotations.NonNull;
 
 import java.io.BufferedReader;
@@ -31,7 +31,7 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
 
     private final Map<SelectionType, GlobalSelectionConfig> configurations = new EnumMap<>(SelectionType.class);
     private final Map<UUID, PlayerVisualizerData> players = new HashMap<>();
-    private final List<BukkitTask> particlesTasks = new ArrayList<>(6);
+    private final List<FoliaRunnable> particlesTasks = new ArrayList<>(6);
 
     private SelectionManager selectionManager;
     private StorageManager storageManager;
@@ -74,7 +74,7 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
         }
 
         if (getConfig().getBoolean("check-updates")) {
-            getServer().getScheduler().runTaskAsynchronously(this, this::checkUpdate);
+            getCompatibilityHelper().getScheduler().runTaskAsynchronously(this::checkUpdate);
         }
     }
 
@@ -92,7 +92,7 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
     }
 
     private void loadConfig() {
-        this.particlesTasks.forEach(BukkitTask::cancel);
+        this.particlesTasks.forEach(FoliaRunnable::cancel);
         this.particlesTasks.clear();
 
         for (SelectionType type : SelectionType.values()) {
