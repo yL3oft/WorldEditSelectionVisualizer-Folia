@@ -33,6 +33,7 @@ public class CompatibilityHelper {
 
     private final WorldEditSelectionVisualizer plugin;
     private final SchedulerUtils scheduler;
+    private final FoliaUtils foliaUtils;
 
     private final boolean supportOffHand = isOffhandSupported();
     private final boolean supportActionBar = isActionBarSupported();
@@ -44,6 +45,7 @@ public class CompatibilityHelper {
     public CompatibilityHelper(WorldEditSelectionVisualizer plugin) {
         this.plugin = plugin;
         this.scheduler = new SchedulerUtils(plugin);
+        this.foliaUtils = new FoliaUtils(plugin);
 
         plugin.getLogger().info("Using WorldEdit " + getWorldEditVersion() + " api");
 
@@ -89,6 +91,10 @@ public class CompatibilityHelper {
 
     public SchedulerUtils getScheduler() {
         return this.scheduler;
+    }
+
+    public FoliaUtils getFoliaUtils() {
+        return this.foliaUtils;
     }
 
     public boolean isHoldingSelectionItem(Player player) {

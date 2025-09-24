@@ -144,7 +144,7 @@ public class CommandWesv implements TabExecutor {
                 return;
             }
 
-            player.teleport(location);
+            plugin.getCompatibilityHelper().getFoliaUtils().teleportPlayer(player, location);
             return;
         }
 

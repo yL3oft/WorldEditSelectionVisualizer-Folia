@@ -21,7 +21,8 @@ public class FoliaRunnable extends BukkitRunnable {
     public synchronized void cancel() throws IllegalStateException {
         if (this.foliaTask != null) {
             try {
-                Method cancel = this.foliaTask.getClass().getMethod("cancel");
+                Method cancel = this.foliaTask.getClass().getDeclaredMethod("cancel");
+                cancel.setAccessible(true);
                 cancel.invoke(this.foliaTask);
             } catch (Exception e) {
                 e.printStackTrace();
